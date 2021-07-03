@@ -502,7 +502,7 @@ org-pomodoro-time-format."
 				  "]"
 				  ))))
   
-    (write-region (print org-pomodoro-output-string) nil "~/.config/i3status/pomodoro-status")
+    (write-region (format "%s" org-pomodoro-output-string) nil "~/.config/i3status/pomodoro-status")
     
     )
 
