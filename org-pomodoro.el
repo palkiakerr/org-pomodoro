@@ -461,16 +461,18 @@ org-pomodoro-time-format."
             (list "[" (format s (org-pomodoro-format-seconds)) "] "))))
   (force-mode-line-update t)
 
-  (setq pomodoro-output-string (list
-			      " "
-			      org-clock-heading
-			      "( "
-			      org-clock-total-time
-			      "  ["
-			      (format s (org-pomodoro-format-seconds))
-			      "]"
-			      ))
-  (write-region (print pomodoro-output-string) nil "~/.config/i3status/pomodoro-status")
+  (when (and (org-pomodoro-active-p) (> (length s) 0))
+    
+    (setq pomodoro-output-string (list
+				  " "
+				  org-clock-heading
+				  "( "
+				  org-clock-total-time
+				  "  ["
+				  (format s (org-pomodoro-format-seconds))
+				  "]"
+				  ))
+    (write-region (print pomodoro-output-string) nil "~/.config/i3status/pomodoro-status")
 
   )
 
