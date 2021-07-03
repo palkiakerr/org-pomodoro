@@ -474,7 +474,7 @@ org-pomodoro-time-format."
 				  ))
     (write-region (print pomodoro-output-string) nil "~/.config/i3status/pomodoro-status")
 
-  )
+  ))
 
 (defun org-pomodoro-kill ()
   "Kill the current timer, reset the phase and update the modeline."
