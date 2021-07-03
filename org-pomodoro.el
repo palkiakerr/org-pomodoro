@@ -474,7 +474,39 @@ org-pomodoro-time-format."
 				  ))
     (write-region (print pomodoro-output-string) nil "~/.config/i3status/pomodoro-status")
 
-  ))
+    ))
+
+(defun org-pomodoro-print-to-status()
+  "Set the modeline accordingly to the current state."
+  (let ((s (cl-case org-pomodoro-state
+             (:pomodoro
+              (propertize org-pomodoro-format 'face 'org-pomodoro-mode-line))
+             (:overtime
+              (propertize org-pomodoro-overtime-format
+                          'face 'org-pomodoro-mode-line-overtime))
+             (:short-break
+              (propertize org-pomodoro-short-break-format
+                          'face 'org-pomodoro-mode-line-break))
+             (:long-break
+              (propertize org-pomodoro-long-break-format
+                          'face 'org-pomodoro-mode-line-break)))))
+    (setq org-pomodoro-output-string
+          (when (and (org-pomodoro-active-p) (> (length s) 0))
+             (list
+				  " "
+				  org-clock-heading
+				  "( "
+				  org-clock-total-time
+				  "  ["
+				  (format s (org-pomodoro-format-seconds))
+				  "]"
+				  ))))
+  
+    (write-region (print pomodoro-output-string) nil "~/.config/i3status/pomodoro-status")
+    
+    )
+
+
 
 (defun org-pomodoro-kill ()
   "Kill the current timer, reset the phase and update the modeline."
@@ -498,6 +530,7 @@ invokes the handlers for finishing."
         (:short-break (org-pomodoro-short-break-finished))
         (:long-break (org-pomodoro-long-break-finished))))
     (run-hooks 'org-pomodoro-tick-hook)
+    (org-pomodoro-print-to-status)
     (org-pomodoro-update-mode-line)
     (when (and (member org-pomodoro-state org-pomodoro-ticking-sound-states)
                (equal (mod (truncate (org-pomodoro-remaining-seconds))
