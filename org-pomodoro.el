@@ -360,7 +360,7 @@ or :break when starting a break.")
 ;;; Internal
 
 ;; Hooked functions to clear status
-(add-hook org-pomodoro-killed-hook (write-region "No Task Active" nil "~/.config/i3status/pomodoro-status")
+(add-hook org-pomodoro-killed-hook (write-region "No Task Active" nil "~/.config/i3status/pomodoro-status"))
 
 ;; Helper Functions
 
