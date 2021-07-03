@@ -459,22 +459,7 @@ org-pomodoro-time-format."
     (setq org-pomodoro-mode-line
           (when (and (org-pomodoro-active-p) (> (length s) 0))
             (list "[" (format s (org-pomodoro-format-seconds)) "] "))))
-  (force-mode-line-update t)
-
-  (when (and (org-pomodoro-active-p) (> (length s) 0))
-    
-    (setq pomodoro-output-string (list
-				  " "
-				  org-clock-heading
-				  "( "
-				  org-clock-total-time
-				  "  ["
-				  (format s (org-pomodoro-format-seconds))
-				  "]"
-				  ))
-    (write-region (print pomodoro-output-string) nil "~/.config/i3status/pomodoro-status")
-
-    ))
+  (force-mode-line-update t))
 
 (defun org-pomodoro-print-to-status()
   "Set the modeline accordingly to the current state."
@@ -495,11 +480,11 @@ org-pomodoro-time-format."
              (list
 				  " "
 				  org-clock-heading
-				  "( "
+				  " :  "
 				  org-clock-total-time
-				  "  ["
+				  "  "
 				  (format s (org-pomodoro-format-seconds))
-				  "]"
+				  ""
 				  ))))
   
     (write-region (format "%s" org-pomodoro-output-string) nil "~/.config/i3status/pomodoro-status")
