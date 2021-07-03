@@ -358,10 +358,6 @@ or :break when starting a break.")
   "The last time the pomodoro was set.")
 
 ;;; Internal
-
-;; Hooked functions to clear status
-(add-hook 'org-pomodoro-killed-hook '(write-region "No Task Active" nil "~/.config/i3status/pomodoro-status"))
-
 ;; Helper Functions
 
 (defun org-pomodoro-active-p ()
@@ -498,6 +494,7 @@ org-pomodoro-time-format."
 
 (defun org-pomodoro-kill ()
   "Kill the current timer, reset the phase and update the modeline."
+  (write-region "<No Active Task>" nil "~/.config/i3status/pomodoro-status")
   (org-pomodoro-killed))
 
 (defun org-pomodoro-tick ()
