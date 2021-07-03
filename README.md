@@ -1,3 +1,5 @@
+My fork of org-pomodoro is designed to add string output to a system status ot task bar, accesssible via a read_file in i3status or the like.
+
 [![MELPA Stable](http://stable.melpa.org/packages/org-pomodoro-badge.svg)](http://stable.melpa.org/#/org-pomodoro)
 [![MELPA](http://melpa.org/packages/org-pomodoro-badge.svg)](http://melpa.org/#/org-pomodoro)
 
